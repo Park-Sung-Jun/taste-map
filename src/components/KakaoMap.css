@@ -1,0 +1,47 @@
+/* KakaoMap custom marker styling */
+.custom-map-marker {
+  position: relative;
+  background-color: var(--accent-gold);
+  color: #111111;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  padding: 2px 6px; /* 패딩 축소 */
+  border-radius: 12px; /* 콤팩트한 둥근 모서리 */
+  border: 1px solid var(--bg-primary); /* 테두리 두께 축소 */
+  box-shadow: var(--shadow-sm);
+  font-size: 0.68rem; /* 폰트 크기 축소 */
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color var(--transition-speed);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.custom-map-marker:hover {
+  transform: scale(1.03) translateY(-1px);
+  background-color: var(--accent-gold-hover);
+  z-index: 10;
+}
+
+.custom-map-marker.active {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-gold);
+  transform: scale(1.05) translateY(-2px); /* 스케일 소폭 하향 */
+  box-shadow: var(--shadow-md);
+  z-index: 20;
+}
+
+.custom-map-marker .star-icon {
+  color: inherit;
+  font-size: 0.6rem; /* 별 크기 축소 */
+  margin-top: -1px;
+}
+
+.custom-map-marker .rating-text {
+  font-weight: 800;
+  opacity: 0.9;
+  font-size: 0.65rem; /* 평점 텍스트 크기 축소 */
+}
+
