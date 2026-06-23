@@ -76,23 +76,23 @@ export default function Sidebar({
 
   return (
     <div className="sidebar-container">
-      {/* Header */}
+      {/* Header — 대표 사진 히어로 배너 (제목 오버레이형) */}
       <div className="sidebar-header">
-        <div className="logo-section">
-          <div>
-            <h1 className="logo-title">
-              <Compass size={24} className="logo-icon" style={{ color: 'var(--accent-gold)' }} />
-              입맛 지도
-            </h1>
-            <p className="logo-sub">My Taste Registry</p>
-          </div>
+        <div className="header-banner">
           <button
-            className="theme-toggle-btn"
+            className="theme-toggle-btn banner-toggle"
             onClick={toggleTheme}
             title={theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환'}
           >
             {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </button>
+          <div className="header-banner-content">
+            <h1 className="logo-title">
+              <Compass size={22} className="logo-icon" style={{ color: 'var(--accent-gold)' }} />
+              내 입맛지도
+            </h1>
+            <p className="logo-sub">Personal Taste Map</p>
+          </div>
         </div>
       </div>
 

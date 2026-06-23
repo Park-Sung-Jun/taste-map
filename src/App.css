@@ -1,5 +1,8 @@
 .app-container {
-  display: flex;
+  /* 사이드바(고정 폭) + 메인 지도(나머지 전부) 2-컬럼 그리드 */
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: 100vh;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -11,12 +14,13 @@
 .sidebar-wrapper-outer {
   height: 100%;
   display: flex;
+  min-width: 0; /* 그리드 트랙 내부 콘텐츠 오버플로 방지 */
 }
 
 .map-container-area {
-  flex: 1;
   height: 100%;
   position: relative;
+  min-width: 0; /* 지도 영역이 그리드 트랙을 넘지 않도록 */
 }
 
 /* Mobile View Toggle Button (Default hidden on desktop) */
@@ -70,7 +74,8 @@
 /* ========================================== */
 @media (max-width: 768px) {
   .app-container {
-    flex-direction: column; /* 세로 배치 구조 */
+    grid-template-columns: 1fr; /* 모바일: 단일 컬럼, 사이드바는 오버레이로 전환 */
+    grid-template-rows: 1fr;
   }
 
   .sidebar-wrapper-outer {

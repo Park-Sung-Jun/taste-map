@@ -1,38 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
-/* CSS Variables for Light / Dark Theme */
+/* ============================================================= */
+/*  내 입맛지도 — Design Tokens                                    */
+/*  Brand Identity: Charcoal · Gold · Cream (차콜·골드·크림)        */
+/* ============================================================= */
 :root {
-  /* Light Theme - 따뜻하고 아늑한 웜 미니멀리즘 (Warm Minimalism / Cream & Terracotta) */
-  --bg-primary: #FAF8F5;      /* 따뜻하고 은은한 오프화이트 크림 페이퍼 */
-  --bg-secondary: #F3EFE6;    /* 아늑하고 포근한 샌드 베이지 */
-  --bg-tertiary: #E8E1D3;     /* 톤다운된 차분한 웜 그레이 */
-  --text-primary: #2C241E;    /* 깊은 에스프레소 브라운 블랙 (식욕을 자극하는 따뜻한 암흑색) */
-  --text-secondary: #63564A;  /* 부드러운 다크 토프 브라운 */
-  --text-muted: #9E9182;      /* 따뜻한 라떼 베이지 그레이 */
-  --accent-gold: #C28E53;     /* 은은한 샴페인 비스킷 골드 */
-  --accent-gold-hover: #A0713A;
-  --accent-green: #40694B;    /* 따뜻하고 신선한 올리브 그린 */
-  --accent-red: #B85042;      /* 먹음직스럽고 따뜻한 칠리 레드 / 테라코타 브라운 */
-  --border-color: #EAE1D2;    /* 아주 정밀하고 얇은 웜 톤의 베이지 선 */
-  --shadow-sm: none;          /* 플랫한 미니멀리즘 기조 유지 */
-  --shadow-md: none;
-  --shadow-lg: 0 4px 16px rgba(44, 36, 30, 0.04); /* 은근하고 포근한 그림자 */
-  
-  --font-serif: 'Inter', 'Noto Sans KR', sans-serif;
-  --font-sans: 'Inter', 'Noto Sans KR', sans-serif;
-  
+  /* ----- Brand Palette (테마 독립 핵심 아이덴티티) ----- */
+  --brand-charcoal: #2C241E;        /* 차콜: 깊은 에스프레소 차콜 (메인 텍스트/딥 뉴트럴) */
+  --brand-charcoal-soft: #63564A;   /* 차콜 라이트: 다크 토프 브라운 */
+  --brand-gold: #C28E53;            /* 골드: 샴페인 비스킷 골드 (핵심 액센트) */
+  --brand-gold-light: #E5BA73;      /* 골드 라이트: 빛나는 샴페인 골드 */
+  --brand-cream: #FAF8F5;           /* 크림: 따뜻한 오프화이트 크림 페이퍼 */
+  --brand-cream-deep: #F3EFE6;      /* 크림 딥: 포근한 샌드 베이지 */
+
+  /* ----- Typography ----- */
+  --font-display: 'Playfair Display', 'Nanum Myeongjo', 'Noto Sans KR', serif; /* 제목 — 우아한 세리프 */
+  --font-body: 'Montserrat', 'Noto Sans KR', sans-serif;                        /* 본문/UI — 세련된 산세리프 */
+  --font-serif: var(--font-display); /* alias (하위 호환) */
+  --font-sans: var(--font-body);     /* alias (하위 호환) */
+
   --transition-speed: 0.2s;
+
+  /* ----- Layout ----- */
+  --sidebar-width: 320px;            /* 사이드바 고정 폭 */
+
+  /* ----- Light Theme — 크림 & 골드 (Warm Minimalism) ----- */
+  --bg-primary: var(--brand-cream);      /* 크림 페이퍼 */
+  --bg-secondary: var(--brand-cream-deep);
+  --bg-tertiary: #E8E1D3;                /* 톤다운된 차분한 웜 그레이 */
+  --text-primary: var(--brand-charcoal); /* 차콜 텍스트 */
+  --text-secondary: var(--brand-charcoal-soft);
+  --text-muted: #9E9182;                 /* 따뜻한 라떼 베이지 그레이 */
+  --accent-gold: var(--brand-gold);
+  --accent-gold-hover: #A0713A;
+  --accent-green: #40694B;               /* 따뜻하고 신선한 올리브 그린 */
+  --accent-red: #B85042;                 /* 먹음직스럽고 따뜻한 칠리 레드 / 테라코타 */
+  --border-color: #EAE1D2;               /* 얇은 웜 톤 베이지 선 */
+  --shadow-sm: none;                     /* 플랫한 미니멀리즘 기조 유지 */
+  --shadow-md: none;
+  --shadow-lg: 0 4px 16px rgba(44, 36, 30, 0.04);
 }
 
 [data-theme='dark'] {
-  /* Dark Theme - 깊고 중후한 웜 차콜 & 골드 (Warm Espresso & Champagne Gold) */
-  --bg-primary: #12100E;      /* 에스프레소 블랙 */
-  --bg-secondary: #1C1916;    /* 깊은 스모키 브라운 차콜 */
-  --bg-tertiary: #27231F;     /* 웜 다크 토프 */
-  --text-primary: #EDE8DF;    /* 부드러운 오프화이트 크림 */
-  --text-secondary: #A69E92;  /* 양장본 페이퍼 토프 */
-  --text-muted: #736B5F;      /* 그림자 베이지 */
-  --accent-gold: #E5BA73;     /* 아늑하고 빛나는 골드 */
+  /* Dark Theme — 차콜 & 골드 (Warm Espresso & Champagne Gold) */
+  --bg-primary: #12100E;            /* 에스프레소 차콜 블랙 */
+  --bg-secondary: #1C1916;          /* 깊은 스모키 브라운 차콜 */
+  --bg-tertiary: #27231F;           /* 웜 다크 토프 */
+  --text-primary: #EDE8DF;          /* 부드러운 오프화이트 크림 */
+  --text-secondary: #A69E92;        /* 양장본 페이퍼 토프 */
+  --text-muted: #736B5F;            /* 그림자 베이지 */
+  --accent-gold: var(--brand-gold-light); /* 빛나는 샴페인 골드 */
   --accent-gold-hover: #F3D098;
   --accent-green: #5F8F6E;    
   --accent-red: #E07A5F;      
@@ -66,9 +83,10 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display); /* Playfair Display — 우아한 세리프 제목 */
   font-weight: 600;
   color: var(--text-primary);
+  letter-spacing: -0.01em; /* 세리프 제목은 과도한 음수 자간을 완화 */
 }
 
 /* Header & Typography Size Down */
