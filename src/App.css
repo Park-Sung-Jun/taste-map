@@ -28,6 +28,11 @@
   display: none;
 }
 
+/* 모바일 기본 화면(지도)에서도 항상 보이는 제작자 표기 — 데스크톱에서는 사이드바 내 site-footer로 충분해 숨김 */
+.mobile-credit {
+  display: none;
+}
+
 /* Loading & Error Overlays */
 .map-loading-overlay, .map-error-placeholder {
   position: absolute;
@@ -91,6 +96,27 @@
 
   .sidebar-wrapper-outer.mobile-open {
     transform: translateX(0); /* 오픈 시 우측으로 스무스하게 슬라이딩인 */
+  }
+
+  /* 모바일 기본 화면에서도 항상 노출되는 제작자 표기 (하단 고정, 토글 버튼과 겹치지 않게 최하단) */
+  .mobile-credit {
+    display: block;
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    padding: 2px 8px;
+    margin: 0;
+  }
+
+  .mobile-credit a {
+    color: var(--text-secondary);
+    text-decoration: underline;
   }
 
   /* 모바일 플로팅 토글 버튼 활성화 */

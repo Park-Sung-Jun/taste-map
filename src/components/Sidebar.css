@@ -341,6 +341,33 @@
   font-size: 0.75rem;
 }
 
+/* Footer — 출처·제작자 표기 */
+.site-footer {
+  padding: 8px 16px 10px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.site-footer p {
+  font-size: 0.7rem;
+  line-height: 1.45;
+  margin: 2px 0;
+}
+
+.site-footer a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.site-footer .ft-made a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
+.site-footer .ft-made a:hover {
+  color: var(--accent-gold);
+}
+
 @media (max-width: 768px) {
   .sidebar-container {
     width: 100%;

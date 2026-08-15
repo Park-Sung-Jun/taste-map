@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Search, Compass, Flame, PenTool, Sun, Moon, AlertCircle, ArrowUpRight } from 'lucide-react';
+import { computeGemStatus } from '../utils/gemStatus';
 import './Sidebar.css';
 
 export default function Sidebar({
@@ -145,8 +146,7 @@ export default function Sidebar({
       <div className="restaurant-list">
         {filteredAndSortedRestaurants.length > 0 ? (
           filteredAndSortedRestaurants.map((restaurant) => {
-            const gap = restaurant.naverRating - restaurant.rating;
-            const isGem = gap < 0; // 내 평점이 네이버보다 높다면 숨겨진 보물
+            const { gap, isGem } = computeGemStatus(restaurant.naverRating, restaurant.rating);
             
             return (
               <div
@@ -219,6 +219,31 @@ export default function Sidebar({
           나만의 미식기록 등록하기
         </button>
       </div>
+
+      {/* Footer — 출처·제작자 표기 */}
+      <footer className="site-footer">
+        <p className="ft-src">
+          자료 출처:{' '}
+          <a href="https://apis.map.kakao.com" target="_blank" rel="noopener">
+            카카오맵 API
+          </a>
+          ,{' '}
+          <a href="https://unsplash.com" target="_blank" rel="noopener">
+            Unsplash
+          </a>
+        </p>
+        <p className="ft-legal">
+          원본 자료가 필요하시면 위 링크의 제공기관에서 직접 받으시기 바랍니다 — 이 사이트는 원자료를 그대로 내려받는 기능을 두지 않습니다.
+        </p>
+        <p className="ft-legal">음식점 사진은 각 권리자에게 권리가 있으며 해당 지역을 안내할 목적으로만 표시합니다.</p>
+        <p className="ft-made">
+          만든 사람 Park Sung Jun ·{' '}
+          <a href="mailto:sungjunpark350@gmail.com?subject=%5B%EB%82%B4%20%EC%9E%85%EB%A7%9B%EC%A7%80%EB%8F%84%5D%20%EB%AC%B8%EC%9D%98">
+            sungjunpark350@gmail.com
+          </a>
+        </p>
+        <p className="ft-legal">틀린 내용이나 자료 표시에 관한 의견은 알려주시면 확인해 고치겠습니다.</p>
+      </footer>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import KakaoMap from './components/KakaoMap';
 import BlogDrawer from './components/BlogDrawer';
@@ -94,12 +94,20 @@ export default function App() {
         />
         
         {/* 모바일 전용 목록/지도 플로팅 전환 토글 버튼 */}
-        <button 
+        <button
           className="mobile-view-toggle-btn"
           onClick={() => setShowMobileList(prev => !prev)}
         >
           {showMobileList ? '🗺️ 지도 보기' : '📋 맛집 목록'}
         </button>
+
+        {/* 모바일 기본(지도) 화면에서도 항상 보이는 제작자 표기 — 전체 출처·안내 문구는 목록 패널의 site-footer 참고 */}
+        <p className="mobile-credit">
+          만든 사람 Park Sung Jun ·{' '}
+          <a href="mailto:sungjunpark350@gmail.com?subject=%5B%EB%82%B4%20%EC%9E%85%EB%A7%9B%EC%A7%80%EB%8F%84%5D%20%EB%AC%B8%EC%9D%98">
+            sungjunpark350@gmail.com
+          </a>
+        </p>
       </div>
 
 
