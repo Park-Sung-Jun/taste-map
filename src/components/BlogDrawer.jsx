@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X, ArrowRight, CheckCircle2, AlertTriangle, User, Calendar } from 'lucide-react';
+import { computeGemStatus } from '../utils/gemStatus';
 import './BlogDrawer.css';
 
 export default function BlogDrawer({ restaurant, onClose }) {
@@ -19,8 +20,7 @@ export default function BlogDrawer({ restaurant, onClose }) {
   if (!restaurant) return null;
 
   const { scores } = restaurant;
-  const gap = restaurant.naverRating - restaurant.rating;
-  const isGem = gap < 0; // 내 평점이 네이버보다 높을 때
+  const { gap, isGem } = computeGemStatus(restaurant.naverRating, restaurant.rating);
 
   // 5대 평가 지표 키 매핑 및 국문 명칭
   const scoreMetrics = [

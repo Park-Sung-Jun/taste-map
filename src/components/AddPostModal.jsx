@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Check } from 'lucide-react';
 import './AddPostModal.css';
 
@@ -25,15 +25,13 @@ export default function AddPostModal({ isOpen, onClose, onSubmit }) {
   });
 
   // 슬라이더 변경 시 최종 평균 나의 평점 자동 계산
-  const calculatedRating = (() => {
-    const sum = 
-      parseFloat(formData.taste) +
-      parseFloat(formData.costPerformance) +
-      parseFloat(formData.atmosphere) +
-      parseFloat(formData.service) +
-      parseFloat(formData.waiting);
-    return (sum / 5.0).toFixed(1);
-  })();
+  const calculatedRatingSum =
+    parseFloat(formData.taste) +
+    parseFloat(formData.costPerformance) +
+    parseFloat(formData.atmosphere) +
+    parseFloat(formData.service) +
+    parseFloat(formData.waiting);
+  const calculatedRating = (calculatedRatingSum / 5.0).toFixed(1);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +63,15 @@ export default function AddPostModal({ isOpen, onClose, onSubmit }) {
       [name]: parseFloat(value).toFixed(1)
     }));
   };
+
+  const sliderConfigs = [
+    { label: '맛 (Flavor)', name: 'taste', min: 1, max: 5, step: 0.1 },
+    { label: '가성비 (Value)', name: 'costPerformance', min: 1, max: 5, step: 0.1 },
+    { label: '분위기 (Vibe)', name: 'atmosphere', min: 1, max: 5, step: 0.1 },
+    { label: '서비스 (Service)', name: 'service', min: 1, max: 5, step: 0.1 },
+    { label: '예약/대기 편의성 (Access)', name: 'waiting', min: 1, max: 5, step: 0.1 },
+    { label: '재방문 의향 (%)', name: 'revisitRate', min: 0, max: 100, step: 1, suffix: '%', onChange: handleChange }
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -249,102 +256,24 @@ export default function AddPostModal({ isOpen, onClose, onSubmit }) {
             <div>
               <h3 className="modal-section-title">내 입맛 평가</h3>
               <div className="sliders-grid">
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>맛 (Flavor)</span>
-                    <span className="slider-val-preview">{formData.taste}</span>
+                {sliderConfigs.map(({ label, name, min, max, step, suffix, onChange }) => (
+                  <div className="slider-item-control" key={name}>
+                    <div className="slider-label-row">
+                      <span>{label}</span>
+                      <span className="slider-val-preview">{formData[name]}{suffix || ''}</span>
+                    </div>
+                    <input
+                      type="range"
+                      name={name}
+                      min={min}
+                      max={max}
+                      step={step}
+                      className="slider-input-range"
+                      value={formData[name]}
+                      onChange={onChange || handleSliderChange}
+                    />
                   </div>
-                  <input
-                    type="range"
-                    name="taste"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    className="slider-input-range"
-                    value={formData.taste}
-                    onChange={handleSliderChange}
-                  />
-                </div>
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>가성비 (Value)</span>
-                    <span className="slider-val-preview">{formData.costPerformance}</span>
-                  </div>
-                  <input
-                    type="range"
-                    name="costPerformance"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    className="slider-input-range"
-                    value={formData.costPerformance}
-                    onChange={handleSliderChange}
-                  />
-                </div>
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>분위기 (Vibe)</span>
-                    <span className="slider-val-preview">{formData.atmosphere}</span>
-                  </div>
-                  <input
-                    type="range"
-                    name="atmosphere"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    className="slider-input-range"
-                    value={formData.atmosphere}
-                    onChange={handleSliderChange}
-                  />
-                </div>
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>서비스 (Service)</span>
-                    <span className="slider-val-preview">{formData.service}</span>
-                  </div>
-                  <input
-                    type="range"
-                    name="service"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    className="slider-input-range"
-                    value={formData.service}
-                    onChange={handleSliderChange}
-                  />
-                </div>
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>예약/대기 편의성 (Access)</span>
-                    <span className="slider-val-preview">{formData.waiting}</span>
-                  </div>
-                  <input
-                    type="range"
-                    name="waiting"
-                    min="1"
-                    max="5"
-                    step="0.1"
-                    className="slider-input-range"
-                    value={formData.waiting}
-                    onChange={handleSliderChange}
-                  />
-                </div>
-                <div className="slider-item-control">
-                  <div className="slider-label-row">
-                    <span>재방문 의향 (%)</span>
-                    <span className="slider-val-preview">{formData.revisitRate}%</span>
-                  </div>
-                  <input
-                    type="range"
-                    name="revisitRate"
-                    min="0"
-                    max="100"
-                    step="1"
-                    className="slider-input-range"
-                    value={formData.revisitRate}
-                    onChange={handleChange}
-                  />
-                </div>
+                ))}
               </div>
 
               <div className="form-group-grid" style={{ marginTop: 12 }}>
